@@ -5,11 +5,11 @@
 -- Shows current AR aging with hard-coded aging buckets
 -- Tables used:
 --     CM - RM00101 - Customer Master
---     CS - RM00103 – Customer Master Summary
+--     CS - RM00103 â€“ Customer Master Summary
 --     RM - RM20101 - Open Transactions
 -- Updated May 1, 2013 to fix aging for credit docs
 -- ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
- USE ABS;
+ USE <database>;
 
  GO
  --the getdate() could be switched with the date in question, however, the tables might have to be changed to historical transactions... not sure yet.
