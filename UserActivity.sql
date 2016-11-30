@@ -34,7 +34,7 @@ ORDER BY User_Name
 
 
 
-select * from DYNAMICS..SY00800 WHERE BACHNUMB = 'DW111716PO' --batch locks
+select * from DYNAMICS..SY00800 WHERE BACHNUMB = '<BACHNUMB>' --batch locks
 select * FROM DYNAMICS..SY00801 --active resources being used by userid
 select * from tempdb..DEX_LOCK 
 select * FROM tempdb..DEX_SESSION 
