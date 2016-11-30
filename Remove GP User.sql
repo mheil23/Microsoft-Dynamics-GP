@@ -11,15 +11,15 @@
 
 --Before a user is removed, make sure all of their sessions are removed from the following tables:
 
-SELECT * FROM DYNAMICS..ACTIVITY --DELETE FROM DYNAMICS..ACTIVITY WHERE USERID IN ('oktbennet2','oknsweeney2')
-SELECT * FROM DYNAMICS..SY00800  --DELETE FROM DYNAMICS..SY00800 WHERE USERID IN ('oktbennet2','oknsweeney2')
-SELECT * FROM DYNAMICS..SY00801 --DELETE FROM DYNAMICS..SY00801 WHERE USERID IN ('oktbennet2','oknsweeney2')
+SELECT * FROM DYNAMICS..ACTIVITY --DELETE FROM DYNAMICS..ACTIVITY WHERE USERID IN ('<user1>','<user2>')
+SELECT * FROM DYNAMICS..SY00800  --DELETE FROM DYNAMICS..SY00800 WHERE USERID IN ('<user1>','<user2>')
+SELECT * FROM DYNAMICS..SY00801 --DELETE FROM DYNAMICS..SY00801 WHERE USERID IN ('<user1>','<user2>')
 SELECT * FROM TEMPDB..DEX_LOCK --this one might be a little tickier if the user has records in here.
 SELECT * FROM TEMPDB..DEX_SESSION -- use sp_who2 to identify which sql_svrid correlates in this tables to the user
 
 delete from tempb..dex_lock
 
-select * from tempdb..dex_session where session_id IN (1872,1393)
+select * from tempdb..dex_session where session_id IN (<sessionid1>,<sessionid2>)
 
 
 select ba.* 
@@ -49,7 +49,7 @@ FROM TEMPDB..DEX_SESSION
 WHERE sqlsvr_spid IN (
 select SPID
 from #sp_who2
-WHERE Login IN ('oktbennet2','oknsweeney2') )
+WHERE Login IN ('<user1>','<user2>') )
 
 
 'oktbennett2'
@@ -57,15 +57,15 @@ WHERE Login IN ('oktbennet2','oknsweeney2') )
 DELETE FROM TEMPDB..DEX_SESSION WHERE sqlsvr_spid IN (
 select *
 from #sp_who2
-WHERE SPID IN (143,106)
-WHERE Login IN ('oktbennett2','oknsweeney2')
+WHERE SPID IN (<SPID1>,<SPID2>)
+WHERE Login IN ('<user1>','<user2>')
 )
 
 
 --reset any batches
-UPDATE SY00500 SET MKDTOPST=0, BCHSTTUS=0 where BACHNUMB='RET07/19/169TJ'
+UPDATE SY00500 SET MKDTOPST=0, BCHSTTUS=0 where BACHNUMB='<BACHNUMB>'
 
-select * from sy00500 where bachnumb = 'RET07/19/169TJ'
+select * from sy00500 where bachnumb = '<BACHNUMB>'
 
 
 
@@ -74,7 +74,7 @@ select * from sy00500 where bachnumb = 'RET07/19/169TJ'
 USE ABS;
 -- Ctrl+H to find and replace  the 6 occurances of the user's name
 DECLARE @USER as varchar(30)
-SET @USER = 'jhamel'
+SET @USER = '<username>'
 --DELETE ABS..SY01401  WHERE USERID = @USER
 --DELETE MOBIA..SY01401  WHERE USERID = @USER
 --DELETE UBS..SY01401  WHERE USERID = @USER
@@ -89,25 +89,25 @@ DELETE DYNAMICS..SY01403  WHERE USERID = @USER
 DELETE DYNAMICS..SY60100  WHERE USERID = @USER
 DELETE DYNAMICS..SY10550  WHERE USERID = @USER
 USE DYNAMICS
-DROP USER jhamel
+DROP USER <username>
 GO
-USE ABS
-DROP USER jhamel
+USE COMPANY1
+DROP USER <username>
 GO
-USE MOBIA
-DROP USER jhamel
+USE COMPANY2
+DROP USER <username>
 GO
-USE UBS
-DROP USER jhamel
+USE COMPANY3
+DROP USER <username>
 GO
-USE TESTA
-DROP USER jhamel
+USE TESTCOMPANY
+DROP USER <username>
 GO
 /*
 Only run this if you're still having an issue adding user back to GP as this will
 remove the SQL login and affect this user's access to all databases on this instance.
 */
---DROP LOGIN dchoing
+--DROP LOGIN <login>
 --GO
 
 
