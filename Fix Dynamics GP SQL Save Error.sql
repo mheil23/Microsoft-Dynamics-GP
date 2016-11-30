@@ -9,9 +9,9 @@
 	Reference URL: http://blog.sqlauthority.com/2007/02/15/sql-server-fix-error-15023-user-already-exists-in-current-database/ 
 */
 
-USE ABS;
+USE <database>;
 
 --Enter the user's userid, password as the needed parameters.
-EXEC sp_change_users_login 'Auto_Fix', 'oknsweeney1', NULL, 'Hello2016@'
+EXEC sp_change_users_login 'Auto_Fix', '<username>', NULL, '<user's password>'
 
 
